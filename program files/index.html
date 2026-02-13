@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Krishi Varsha - Chinna Reddy</title>
+    <style>
+        :root { --saffron: #FF9933; --white: #FFFFFF; --green: #138808; --navy: #000080; }
+        
+        body { 
+            margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/India_map_inner_boundary.svg/1200px-India_map_inner_boundary.svg.png') no-repeat center center fixed;
+            background-size: contain; background-color: #f0f0f0;
+        }
+
+        /* Tiranga overlay on the whole page */
+        .page-overlay {
+            background: linear-gradient(to bottom, rgba(255, 153, 51, 0.8), rgba(255, 255, 255, 0.8), rgba(19, 136, 8, 0.8));
+            min-height: 100vh; width: 100%; padding-bottom: 50px;
+        }
+
+        .header { background: var(--navy); color: white; padding: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .container { max-width: 700px; margin: 20px auto; background: rgba(255, 255, 255, 0.9); padding: 25px; border-radius: 15px; border: 3px solid var(--navy); }
+        
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        label { display: block; font-size: 11px; color: var(--navy); font-weight: bold; }
+        
+        /* Colored Input Boxes */
+        input { 
+            width: 100%; padding: 10px; border-radius: 5px; box-sizing: border-box; font-weight: bold;
+            border: 2px solid var(--navy);
+            /* Gradient background for input boxes */
+            background: linear-gradient(to right, #fff4e6, #ffffff, #e8f5e9);
+        }
+        
+        /* Specific colors for input rows to match Flag */
+        .grid div:nth-child(-n+6) input { border-left: 8px solid var(--saffron); }
+        .grid div:nth-child(n+7):nth-child(-n+14) input { border-left: 8px solid #ddd; }
+        .grid div:nth-child(n+15) input { border-left: 8px solid var(--green); }
+
+        .btn { grid-column: span 2; background-color: var(--navy); color: white; border: none; padding: 15px; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 10px; }
+        .btn:hover { background: #000050; transform: scale(1.02); }
+
+        .signature { position: fixed; bottom: 10px; right: 20px; font-size: 14px; color: white; background: var(--navy); padding: 8px 15px; border-radius: 20px; font-weight: bold; z-index: 100; }
+    </style>
+</head>
+<body>
+    <div class="page-overlay">
+        <div class="header"><h1>कृषि वर्षा (Krishi Varsha)</h1></div>
+        <div class="container">
+            <h2 style="text-align:center; color:var(--navy);">Agri-Rainfall Input Form</h2>
+            <form action="/predict" method="post">
+                <div class="grid">
+                    <div class="input-group"><label>Location ID</label><input type="number" step="any" name="Location" required></div>
+                    <div class="input-group"><label>Min Temp</label><input type="number" step="any" name="MinTemp" required></div>
+                    <div class="input-group"><label>Max Temp</label><input type="number" step="any" name="MaxTemp" required></div>
+                    <div class="input-group"><label>Rainfall Today</label><input type="number" step="any" name="Rainfall" required></div>
+                    <div class="input-group"><label>Wind Gust Speed</label><input type="number" step="any" name="WindGustSpeed" required></div>
+                    <div class="input-group"><label>Wind Speed 9am</label><input type="number" step="any" name="WindSpeed9am" required></div>
+                    <div class="input-group"><label>Wind Speed 3pm</label><input type="number" step="any" name="WindSpeed3pm" required></div>
+                    <div class="input-group"><label>Humidity 9am</label><input type="number" step="any" name="Humidity9am" required></div>
+                    <div class="input-group"><label>Humidity 3pm</label><input type="number" step="any" name="Humidity3pm" required></div>
+                    <div class="input-group"><label>Pressure 9am</label><input type="number" step="any" name="Pressure9am" required></div>
+                    <div class="input-group"><label>Pressure 3pm</label><input type="number" step="any" name="Pressure3pm" required></div>
+                    <div class="input-group"><label>Temp 9am</label><input type="number" step="any" name="Temp9am" required></div>
+                    <div class="input-group"><label>Temp 3pm</label><input type="number" step="any" name="Temp3pm" required></div>
+                    <div class="input-group"><label>Rain Today (0/1)</label><input type="number" step="any" name="RainToday" required></div>
+                    <div class="input-group"><label>Wind Gust Dir ID</label><input type="number" step="any" name="WindGustDir" required></div>
+                    <div class="input-group"><label>Wind Dir 9am ID</label><input type="number" step="any" name="WindDir9am" required></div>
+                    <div class="input-group"><label>Wind Dir 3pm ID</label><input type="number" step="any" name="WindDir3pm" required></div>
+                    <div class="input-group"><label>Year</label><input type="number" name="year" required></div>
+                    <div class="input-group"><label>Month</label><input type="number" name="month" required></div>
+                    <div class="input-group"><label>Day</label><input type="number" name="day" required></div>
+                    <button type="submit" class="btn">Predict Rainfall for Farmers</button>
+                </div>
+            </form>
+        </div>
+        <div class="signature">Project Done By Chinna Reddy</div>
+    </div>
+</body>
+</html>

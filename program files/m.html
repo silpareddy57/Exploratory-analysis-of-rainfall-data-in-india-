@@ -1,0 +1,41 @@
+from flask import Flask, render_template, request
+import pickle
+import os
+import numpy as np
+
+app = Flask(__name__)
+
+# 👇 PASTE MODEL LOADING CODE HERE
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(base_dir, "models", "model.pkl")
+encoder_path = os.path.join(base_dir, "models", "encoder.pkl")
+
+with open(model_path, "rb") as f:
+    model = pickle.load(f)
+
+with open(encoder_path, "rb") as f:
+    encoder = pickle.load(f)
+
+# 👇 Then your routes start
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    state = request.form['state']
+    year = int(request.form['year'])
+
+    state_encoded = encoder.transform([state])
+    input_data = np.array([[state_encoded[0], year]])
+
+    prediction = model.predict(input_data)
+
+    return render_template('index.html',
+                           prediction_text=f"Predicted Rainfall: {prediction[0]:.2f}")
+
+if __name__ == "__main__":
+    app.run(debug=True)
